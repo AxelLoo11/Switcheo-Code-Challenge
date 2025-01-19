@@ -12,11 +12,24 @@
   <!-- You may reorganise the whole HTML, as long as your form achieves the same effect. -->
   <form onsubmit="return !1">
     <h5>Swap</h5>
+
+    <label class="block text-sm font-medium mb-1" for="send-token">Send Token</label>
+    <select id="send-token" class="w-full mb-4 border rounded-lg p-2">
+      <option value="" disabled selected>Select a token</option>
+    </select>
+
     <label for="input-amount">Amount to send</label>
-    <input id="input-amount" />
+    <input id="input-amount" type="text" />
+
+
+    <label class="block text-sm font-medium mb-1" for="receive-token">Receive Token</label>
+    <select id="receive-token" class="w-full mb-4 border rounded-lg p-2">
+      <option value="" disabled selected>Select a token</option>
+    </select>
 
     <label for="output-amount">Amount to receive</label>
-    <input id="output-amount" />
+    <input id="output-amount" type="text" />
+
 
     <button>CONFIRM SWAP</button>
   </form>
