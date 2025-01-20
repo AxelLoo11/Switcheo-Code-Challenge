@@ -1,0 +1,47 @@
+Inefficiencies and Anti-patterns
+
+In useEffect():
+1. Property 'err' does not exist on type 'Console'.
+Solution: use console.error
+
+2. The useEffect() function that fetches prices does not clean up if the component unmounts during an API call.
+Solution: add the clean-up code
+
+In useMemo(): 
+1. Property 'blockchain' does not exist on type 'WalletBalance'.
+Solution: add the attribute to 'WalletBalance'.
+
+2. The condition in the filter method uses undefined variables like 'lhsPriority' instead of 'balancePriority'.
+Solution: correct the variable name.
+
+3. filter logic includes balances with an amount of '<= 0', which is wrong for filtering valid wallet balances (valid value should be non-nagative I think).
+Solution: correct the logic.
+
+4. for sort method, if the priority is the same, this method will not define the relative order of the items. This can result in inconsistent ordering for items with the same priority.
+Solution: current assume priority can be the same.
+
+5. 'sortedBalances' seems not depend on 'prices'.
+Solution: remove the dependency 'prices'.
+
+
+For Rendering Effiency:
+1. Variable 'rows' is derived from 'sortedBalances', but it is recalculated every render without memoization. Similar for 'sortedBalances', this may not change if 'sortedBalances' is not changed.
+Solution: use useMemo for row to avoid recalculate.
+
+2. unused parameter 'formattedBalances'. Also 'row' seems should be derived from 'formattedBalances'.
+Solution: use the correct variable.
+
+
+For Typescript safety:
+1. The 'getPriority' function uses any type for the blockchain parameter. should be a defined type I think.
+Solution: assume the blockchain in string type.
+
+2. The 'prices' state should have a defined type.
+Solution: define a Prices type.
+
+
+Others:
+1. Unnecessary interface 'FormattedWalletBalance' which only contains one difference compared with 'WalletBalance'. The formatted value can be easily calculated. In my view, no need to allocated another memory to store the 'FormattedWalletBalance'.
+Solution: remove the 'FormattedWalletBalance'.
+
+2. Can priority be the same for different blockchain? not sure about this, here assume it can be the same.
