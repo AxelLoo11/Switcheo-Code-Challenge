@@ -3,36 +3,67 @@
 <head>
   <title>Fancy Form</title>
 
-  <!-- You may add more stuff here -->
   <link href="style.css" rel="stylesheet" />
 </head>
 
 <body>
 
-  <!-- You may reorganise the whole HTML, as long as your form achieves the same effect. -->
   <form onsubmit="return !1">
     <h5>Swap</h5>
 
-    <label class="block text-sm font-medium mb-1" for="send-token">Send Token</label>
-    <select id="send-token" class="w-full mb-4 border rounded-lg p-2">
-      <option value="" disabled selected>Select a token</option>
-    </select>
+    <div class="largeline">
+      <label for="input-amount">Send</label>
 
-    <label for="input-amount">Amount to send</label>
-    <input id="input-amount" type="text" />
+      <div class="rowbox">
+        <input id="input-amount" type="text" />
+        <div id="send-token-select" class="custom-select" onclick="openModal('send')">
+          <div class="selected-token">
+            <img id="send-token-icon"
+              src="tokens/usdc.svg" alt="Token Icon" />
+            <span id="send-token-name">USDC</span>
+          </div>
+          <svg class="dropdown-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+            <path d="M7 10l5 5 5-5H7z" fill="#e0e0e0"></path>
+          </svg>
+        </div>
+      </div>
+    </div>
 
 
-    <label class="block text-sm font-medium mb-1" for="receive-token">Receive Token</label>
-    <select id="receive-token" class="w-full mb-4 border rounded-lg p-2">
-      <option value="" disabled selected>Select a token</option>
-    </select>
+    <div class="largeline">
+      <label for="output-amount">Receive</label>
 
-    <label for="output-amount">Amount to receive</label>
-    <input id="output-amount" type="text" />
+      <div class="rowbox">
+        <input id="output-amount" type="text" disabled />
+        <div id="receive-token-select" class="custom-select" onclick="openModal('receive')">
+          <div class="selected-token">
+            <img id="receive-token-icon"
+              src="add-circle-svgrepo-com.svg" alt="Token Icon" />
+            <span id="receive-token-name">Select</span>
+          </div>
+          <svg class="dropdown-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+            <path d="M7 10l5 5 5-5H7z" fill="#e0e0e0"></path>
+          </svg>
+        </div>
+      </div>
+
+    </div>
 
 
     <button>CONFIRM SWAP</button>
   </form>
+
+  <div id="token-modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <input type="text" id="search-bar" placeholder="Search token..." oninput="filterTokens()" />
+        <button class="close-modal" onclick="closeModal()">×</button>
+      </div>
+      <div class="token-list" id="token-list">
+      </div>
+    </div>
+  </div>
+
   <script src="script.js"></script>
 </body>
 
